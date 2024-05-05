@@ -19,7 +19,7 @@
 ** 
 ** Inspired by https://github.com/sarnau/MMMMobileAlerts , Written my Markus Fritze, 2018.
 **
-** Emulates a Technoline MA10100 temperature sensor to understand data upload on WeatherHub cloud service
+** Emulates a Technoline MA10100 temperature sensor to understand data upload on cloud service: https://measurements.mobile-alerts.eu/
 **
 ** See code comments for necessary customizations (TODOs)
 ** 
