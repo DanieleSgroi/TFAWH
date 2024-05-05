@@ -33,7 +33,7 @@
 ** DEFINES
 **************************************************************************************************************************************/
 
-#define DST_PORT              80  // UDP Destination www.data199.com:443
+#define DST_PORT              80  // UDP Destination www.data199.com
 #define NTP_PACKET_SIZE       48  // NTP time stamp is in the first 48 bytes of the message
 #define NTP_PORT            8888  // NTP UDP Port
 
