@@ -4,7 +4,7 @@
 ** File:    TFAWH.INO
 ** Purpose: Main SW File
 ** 
-** (C) 2019 by Daniele Sgroi - daniele.sgroi@gmail.com
+** (C) 2024 by Daniele Sgroi - daniele.sgroi@gmail.com
 **
 ** VERSION:
 **  - May 05, 2024 - V1.0 - D. Sgroi
@@ -20,6 +20,8 @@
 ** Inspired by https://github.com/sarnau/MMMMobileAlerts , Written my Markus Fritze, 2018.
 **
 ** Emulates a Technoline MA10100 temperature sensor to understand data upload on WeatherHub cloud service
+**
+** See code comments for necessary customizations (TODOs)
 ** 
 ** This code is in the public domain.
 **
@@ -61,7 +63,7 @@ byte packetBuffer[NTP_PACKET_SIZE]; //buffer to hold incoming & outgoing packets
 
 EthernetClient client;
 
-// TODO: customize 0xXX with sensor mac address
+// TODO: customize 0xXX with MA10100 sensor mac address
 static uint8_t mobileAlertPacket[64] = {0xCE,0x66,0x32,0x0C,0x72,0x12,0x02,0xXX,0xXX,0xXX,0xXX,0xXX,0x00,0x01,0x00,0x00,0x00,0x00,0x1A,000,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
                                         0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x51} ; // Sensor Binary Payload
 int iCurTmp = 0, iPreTmp = 0;
@@ -262,8 +264,8 @@ void loop() {
 
 // Offset       00 01    04 05 06        11 1213 1415 1617 18 19    22 23                                                                            62 63
 // HEX package: CE 66320C72 12 02XXXXXXXXXX 0002 00DE 00DE 1B B50A4D1A 00000000000000000000000000000000000000000000000000000000000000000000000000000000 51
-//              |  |        |  |            |    |    |    |          |                                                                                |
-// header ------/  |        |  |            |    |    |    |          \--- Pad                                                   checksum -------------/
+//              |  |        |  |            |    |    |    |           |                                                                                |
+// header ------/  |        |  |            |    |    |    |           \--- Pad                                                   checksum -------------/
 // nix timestamp --/        |  |            |    |    |    \-------------- Unknown (1A/1B)
 // pkg lenght --------------/  |            |    |    \------------------- Previous Temperature
 // sensor id ------------------/            |    \------------------------ Current Temperature
